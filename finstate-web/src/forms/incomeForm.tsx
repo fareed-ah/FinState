@@ -1,4 +1,4 @@
-import { Button, Container, TextField, Typography } from '@material-ui/core';
+import { Box, Button, Container, Divider, TextField, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
 import React, { useState } from 'react';
 import { DoubleInputField } from '../components/doubleinputfield';
@@ -9,6 +9,46 @@ interface IncomeFormProps {
 }
 
 const useStyles = makeStyles({
+    sectionDivider: {
+        marginTop: 32,
+        marginBottom: 32,
+    },
+
+    heading: {
+        fontWeight: "bold",
+        fontSize: 24,
+        marginTop: 64,
+    },
+
+    subheading: {
+        fontSize: 20,
+        marginTop: 8,
+    },
+
+    inputLabel: {
+        fontWeight: 500,
+        fontSize: 20,
+        margin: 8,
+    },
+
+    formLabelLeft: {
+        fontWeight: 500,
+        fontSize: 20,
+        margin: 8,
+        flex: 0.5,
+    },
+
+    inputField: {
+        margin: 8,
+        flex: 1,
+        flexGrow: 1,
+    },
+
+    inputBlock: {
+        marginTop: 8,
+        marginBottom: 8,
+    },
+
     doneButton: {
         backgroundColor: "#000",
         color: "#FFF",
@@ -33,7 +73,13 @@ export const IncomeForm: React.FC<IncomeFormProps> = ({ }) => {
     }
 
     return (
-        <Container>
+        <Box>
+            <Typography className={classes.heading}>
+                Part 1 - Property Income
+            </Typography>
+            <Typography className={classes.subheading}>The following section will determine your estimated income! </Typography>
+            <Divider orientation="horizontal" variant="fullWidth" className={classes.sectionDivider} />
+
             <Typography className={classes.prompt} gutterBottom>Please provide your own projected rental income or provide actual rental income if the property
                     is already rented out.</Typography>
             <TextField name="rental-income" label="Rental Income" variant="outlined" />
@@ -44,6 +90,6 @@ export const IncomeForm: React.FC<IncomeFormProps> = ({ }) => {
             ))}
             <Button className={classes.addButton} onClick={() => addIncomeType()}>Add</Button>
             <Button className={classes.doneButton}>Done</Button>
-        </Container>
+        </Box>
     );
 }

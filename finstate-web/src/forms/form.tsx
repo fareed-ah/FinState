@@ -2,9 +2,10 @@ import React from 'react';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import { Accordion, AccordionSummary, Typography, AccordionDetails } from '@material-ui/core';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import { IncomeForm } from './incomeForm';
-import { ExpenseForm } from './expenseForm';
 import { MortgageForm } from './mortgageForm';
+import { FormHeader } from './FormHeader';
+import { IncomeForm } from './IncomeForm';
+import { ExpenseForm } from './ExpenseForm';
 
 interface FormProps {
 
@@ -13,82 +14,78 @@ interface FormProps {
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         root: {
-            width: '100%',
+            marginBottom: 64,
+            paddingTop: 64,
+            display: "flex",
+            flexDirection: "column",
+            color: "#2C3345",
         },
+
+        sectionDivider: {
+            marginTop: 32,
+            marginBottom: 32,
+        },
+
         heading: {
             fontWeight: "bold",
-            fontSize: theme.typography.pxToRem(18),
-            flexBasis: '33.33%',
-            flexShrink: 0,
+            fontSize: 24,
+            marginTop: 64,
         },
-        secondaryHeading: {
-            fontSize: theme.typography.pxToRem(15),
-            color: theme.palette.text.secondary,
+
+        subheading: {
+            fontSize: 20,
+            marginTop: 8,
         },
+
+        inputLabel: {
+            fontWeight: 500,
+            fontSize: 20,
+            margin: 8,
+        },
+
+        formLabelLeft: {
+            fontWeight: 500,
+            fontSize: 20,
+            margin: 8,
+            flex: 0.5,
+        },
+
+        inputField: {
+            margin: 8,
+            flex: 1,
+            flexGrow: 1,
+        },
+
+        inputBlock: {
+            marginTop: 8,
+            marginBottom: 8,
+        },
+
+        button: {
+            backgroundColor: "#000",
+            color: "#FFF",
+            paddingTop: "15px",
+            paddingBottom: "15px",
+            paddingRight: "32px",
+            paddingLeft: "32px",
+            margin: 32,
+            alignSelf: "center"
+        },
+
+        formControl: {
+            margin: 8
+        }
     }),
 );
 
 export const Form: React.FC<FormProps> = ({ }) => {
     const classes = useStyles();
-    const [expanded, setExpanded] = React.useState<string | false>(false);
-
-    const handleChange = (panel: string) => (event: React.ChangeEvent<{}>, isExpanded: boolean) => {
-        setExpanded(isExpanded ? panel : false);
-    };
-
     return (
         <div className={classes.root}>
-            <Accordion expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
-                <AccordionSummary
-                    expandIcon={<ExpandMoreIcon />}
-                    aria-controls="panel1bh-content"
-                    id="panel1bh-header"
-                >
-                    <Typography className={classes.heading}>Income</Typography>
-                </AccordionSummary>
-                <AccordionDetails>
-                    <IncomeForm />
-                </AccordionDetails>
-            </Accordion>
-            <Accordion expanded={expanded === 'panel2'} onChange={handleChange('panel2')}>
-                <AccordionSummary
-                    expandIcon={<ExpandMoreIcon />}
-                    aria-controls="panel2bh-content"
-                    id="panel2bh-header">
-                    <Typography className={classes.heading}>Expenses</Typography>
-                </AccordionSummary>
-                <AccordionDetails>
-                    <ExpenseForm />
-                </AccordionDetails>
-            </Accordion>
-            <Accordion expanded={expanded === 'panel3'} onChange={handleChange('panel3')}>
-                <AccordionSummary
-                    expandIcon={<ExpandMoreIcon />}
-                    aria-controls="panel3bh-content"
-                    id="panel3bh-header"
-                >
-                    <Typography className={classes.heading}>Mortgage Payments</Typography>
-
-                </AccordionSummary>
-                <AccordionDetails>
-                    <MortgageForm />
-                </AccordionDetails>
-            </Accordion>
-            <Accordion expanded={expanded === 'panel4'} onChange={handleChange('panel4')}>
-                <AccordionSummary
-                    expandIcon={<ExpandMoreIcon />}
-                    aria-controls="panel4bh-content"
-                    id="panel4bh-header"
-                >
-                    <Typography className={classes.heading}>Results</Typography>
-                </AccordionSummary>
-                <AccordionDetails>
-                    <Typography>
-                        Nunc vitae orci ultricies, auctor nunc in, volutpat nisl. Integer sit amet egestas eros,
-                        vitae egestas augue. Duis vel est augue.
-          </Typography>
-                </AccordionDetails>
-            </Accordion>
+            <FormHeader />
+            <IncomeForm />
+            <ExpenseForm />
+            <MortgageForm />
         </div>
     );
 }
