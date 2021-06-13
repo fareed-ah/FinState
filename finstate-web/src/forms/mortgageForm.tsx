@@ -1,14 +1,38 @@
-import { Box, Container, Grid, MenuItem, Select, TextField, Typography } from '@material-ui/core';
+import classes from '*.module.css';
+import { Box, Container, Divider, Grid, makeStyles, MenuItem, Select, TextField, Typography } from '@material-ui/core';
 import React from 'react'
 
 interface MortgageFormProps {
 
 }
+const useStyles = makeStyles({
+    sectionDivider: {
+        marginTop: 32,
+        marginBottom: 32,
+    },
+
+    heading: {
+        fontWeight: "bold",
+        fontSize: 24,
+        marginTop: 64,
+    },
+
+    subheading: {
+        fontSize: 20,
+        marginTop: 8,
+    },
+})
 
 export const MortgageForm: React.FC<MortgageFormProps> = ({ }) => {
+    const classes = useStyles()
     return (
-        <Container>
-            <Typography gutterBottom>The mortgage payment calculator below estimates your monthly payment</Typography>
+        <Box>
+            <Typography className={classes.heading}>
+                Part 3 - Mortgage Payment
+            </Typography>
+            <Typography className={classes.subheading}>The mortgage payment calculator below estimates your monthly payment </Typography>
+            <Divider orientation="horizontal" variant="fullWidth" className={classes.sectionDivider} />
+
             <Grid container spacing={1}>
                 <Grid container item xs={12} spacing={3}>
                     <Grid item xs={2}>
@@ -78,7 +102,7 @@ export const MortgageForm: React.FC<MortgageFormProps> = ({ }) => {
                 </Grid>
             </Grid>
 
-        </Container>
+        </Box>
 
     );
 }

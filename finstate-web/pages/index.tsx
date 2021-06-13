@@ -1,7 +1,7 @@
 import { Container, Typography, Box, Button } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles';
 import { useRouter } from 'next/dist/client/router';
-import React from 'react'
+import React from 'react';
 import { Form } from '../src/forms/form';
 
 const useStyles = makeStyles({
@@ -109,12 +109,14 @@ export default function Index() {
 Evaluate the costs and profit margins of your investment property.</Typography>
         <Button variant="contained" className={classes.button}>Get Started</Button>
       </Box>
+
       <Box className={classes.section2}>
         <Container maxWidth="md">
           <Typography variant="h5" className={classes.heading5}>Everything you need to calculate cash flow!</Typography>
           <Form />
         </Container>
       </Box>
+
       <Box className={classes.footer}>
         <Typography variant="body1">Copyright 2021 FINSTATE.</Typography>
       </Box>
