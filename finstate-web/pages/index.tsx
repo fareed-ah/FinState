@@ -2,7 +2,7 @@ import { Container, Typography, Box, Button } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles';
 import { useRouter } from 'next/dist/client/router';
 import React from 'react'
-import { Form } from '../src/form';
+import { Form } from '../src/forms/form';
 
 const useStyles = makeStyles({
   root: {
@@ -107,7 +107,7 @@ export default function Index() {
         <Typography variant="h2" className={classes.heading2}>How profitable is your investment?</Typography>
         <Typography variant="body1" className={classes.body1}>Easily calculate the costs of your project with just a few clicks. <br />
 Evaluate the costs and profit margins of your investment property.</Typography>
-        <Button variant="contained" className={classes.button} onClick={() => router.push('/views/platforms')}>Get Started</Button>
+        <Button variant="contained" className={classes.button}>Get Started</Button>
       </Box>
       <Box className={classes.section2}>
         <Container maxWidth="md">

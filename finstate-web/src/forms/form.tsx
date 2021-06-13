@@ -2,6 +2,9 @@ import React from 'react';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import { Accordion, AccordionSummary, Typography, AccordionDetails } from '@material-ui/core';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import { IncomeForm } from './incomeForm';
+import { ExpenseForm } from './expenseForm';
+import { MortgageForm } from './mortgageForm';
 
 interface FormProps {
 
@@ -13,7 +16,8 @@ const useStyles = makeStyles((theme: Theme) =>
             width: '100%',
         },
         heading: {
-            fontSize: theme.typography.pxToRem(15),
+            fontWeight: "bold",
+            fontSize: theme.typography.pxToRem(18),
             flexBasis: '33.33%',
             flexShrink: 0,
         },
@@ -43,26 +47,18 @@ export const Form: React.FC<FormProps> = ({ }) => {
                     <Typography className={classes.heading}>Income</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
-                    <Typography>
-                        Nulla facilisi. Phasellus sollicitudin nulla et quam mattis feugiat. Aliquam eget
-                        maximus est, id dignissim quam.
-          </Typography>
+                    <IncomeForm />
                 </AccordionDetails>
             </Accordion>
             <Accordion expanded={expanded === 'panel2'} onChange={handleChange('panel2')}>
                 <AccordionSummary
                     expandIcon={<ExpandMoreIcon />}
                     aria-controls="panel2bh-content"
-                    id="panel2bh-header"
-                >
+                    id="panel2bh-header">
                     <Typography className={classes.heading}>Expenses</Typography>
-
                 </AccordionSummary>
                 <AccordionDetails>
-                    <Typography>
-                        Donec placerat, lectus sed mattis semper, neque lectus feugiat lectus, varius pulvinar
-                        diam eros in elit. Pellentesque convallis laoreet laoreet.
-          </Typography>
+                    <ExpenseForm />
                 </AccordionDetails>
             </Accordion>
             <Accordion expanded={expanded === 'panel3'} onChange={handleChange('panel3')}>
@@ -75,10 +71,7 @@ export const Form: React.FC<FormProps> = ({ }) => {
 
                 </AccordionSummary>
                 <AccordionDetails>
-                    <Typography>
-                        Nunc vitae orci ultricies, auctor nunc in, volutpat nisl. Integer sit amet egestas eros,
-                        vitae egestas augue. Duis vel est augue.
-          </Typography>
+                    <MortgageForm />
                 </AccordionDetails>
             </Accordion>
             <Accordion expanded={expanded === 'panel4'} onChange={handleChange('panel4')}>
