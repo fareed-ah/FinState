@@ -1,9 +1,9 @@
 export type IncomeType = {
-    name: string | undefined,
-    amount: number | undefined
+    name: string ,
+    amount: number 
 }
 
 export const EmptyIncomeType: IncomeType = {
-    name: undefined,
-    amount: undefined
+    name: "",
+    amount: 0
 }

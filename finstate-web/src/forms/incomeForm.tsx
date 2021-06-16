@@ -65,11 +65,31 @@ const useStyles = makeStyles({
 
 export const IncomeForm: React.FC<IncomeFormProps> = ({ }) => {
     const classes = useStyles()
-    const [incomeTypes, setIncomeTypes] = useState<IncomeType[]>([])
+    const [incomeTypes, setIncomeTypes] = useState<IncomeType[] | []>([{ name: "", amount: 0 }])
 
 
     const addIncomeType = () => {
-        setIncomeTypes(prevState => [EmptyIncomeType, ...prevState])
+        setIncomeTypes(prevState => [...prevState, { name: "", amount: 0 }])
+    }
+
+    const setIncomeType = (index: number, type: string) => {
+        let items: IncomeType[] = incomeTypes;
+        items[index].name = type
+
+        setIncomeTypes([...items]);
+    }
+
+    const setIncomeAmount = (index: number, amount: number) => {
+        let items: IncomeType[] = incomeTypes;
+        items[index].amount = amount
+
+        setIncomeTypes([...items]);
+    }
+
+    const removeIncomeType = (index: number) => {
+        let items: IncomeType[] = incomeTypes;
+        items.splice(index, 1)
+        setIncomeTypes([...items]);
     }
 
     return (
@@ -85,11 +105,11 @@ export const IncomeForm: React.FC<IncomeFormProps> = ({ }) => {
             <TextField name="rental-income" label="Rental Income" variant="outlined" />
 
             <Typography className={classes.prompt} gutterBottom>Add any other types of income that may apply. Ex, storage, parking, laundry etc.</Typography>
-            {incomeTypes.map((incomeType) => (
-                <DoubleInputField name={incomeType.name} amount={incomeType.amount} ></DoubleInputField>
+
+            {incomeTypes.map((incomeType: IncomeType, index: number) => (
+                <DoubleInputField key={index} index={index} setAmount={setIncomeAmount} setType={setIncomeType} removeItem={removeIncomeType} name={incomeType.name} amount={incomeType.amount} ></DoubleInputField>
             ))}
             <Button className={classes.addButton} onClick={() => addIncomeType()}>Add</Button>
-            <Button className={classes.doneButton}>Done</Button>
         </Box>
     );
 }

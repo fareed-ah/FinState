@@ -1,6 +1,7 @@
 import classes from '*.module.css';
 import { Box, Container, Divider, Grid, makeStyles, MenuItem, Select, TextField, Typography } from '@material-ui/core';
 import React from 'react'
+import { CustomNumberInputField } from '../components/CustomNumberInputField';
 
 interface MortgageFormProps {
 
@@ -21,6 +22,16 @@ const useStyles = makeStyles({
         fontSize: 20,
         marginTop: 8,
     },
+
+
+    finalPayment: {
+
+        backgroundColor: "#60C798",
+        color: "#FFF",
+        maxWidth: 220,
+        padding: 24,
+        borderRadius: 8
+    }
 })
 
 export const MortgageForm: React.FC<MortgageFormProps> = ({ }) => {
@@ -33,74 +44,45 @@ export const MortgageForm: React.FC<MortgageFormProps> = ({ }) => {
             <Typography className={classes.subheading}>The mortgage payment calculator below estimates your monthly payment </Typography>
             <Divider orientation="horizontal" variant="fullWidth" className={classes.sectionDivider} />
 
-            <Grid container spacing={1}>
-                <Grid container item xs={12} spacing={3}>
-                    <Grid item xs={2}>
-                        <Typography>Asking Price</Typography>
-                    </Grid>
-                    <Grid item xs={10}>
-                        <TextField value="200,000"></TextField>
-                    </Grid>
+            <CustomNumberInputField label="Asking Price" icon="$" placeholder="250,000" />
+            <Grid container direction="row" spacing={1}>
+                <Grid item xs={6}>
+                    <CustomNumberInputField label="Asking Price" icon="$" placeholder="250,000" />
                 </Grid>
-                <Grid container item xs={12} spacing={3} alignItems="center">
-                    <Grid item xs={2}>
-                        <Typography>Down Payment</Typography>
-                    </Grid>
-                    <Grid item xs={10}>
-                        <Box display="flex" flexDirection="column" maxWidth={100}>
-                            <TextField value="10.00%"></TextField>
-                            <TextField value="20,000"></TextField>
-                        </Box>
-                    </Grid>
+                <Grid item xs={6}>
+                    <CustomNumberInputField label="Down Payment" icon="$" placeholder="25,000" />
                 </Grid>
-                <Grid container item xs={12} spacing={3}>
-                    <Grid item xs={2}>
-                        <Typography>Total mortgage</Typography>
-                    </Grid>
-                    <Grid item xs={10}>
-                        <Box display="flex" flexDirection="column" maxWidth={100}>
-                            <TextField value="$180,000"></TextField>
-                        </Box>
-                    </Grid>
+
+                <Grid item xs={6}>
+                    <CustomNumberInputField label="Motgage Length" icon="years" placeholder="25" />
                 </Grid>
-                <Grid container item xs={12} spacing={3}>
-                    <Grid item xs={2}>
-                        <Typography>Ammortization Period</Typography>
-                    </Grid>
-                    <Grid item xs={10}>
-                        <Box display="flex" flexDirection="column" maxWidth={100}>
-                            <Select>
-                                <MenuItem value={5}>5 Years</MenuItem>
-                                <MenuItem value={10}>10 Years</MenuItem>
-                                <MenuItem value={15}>15 Years</MenuItem>
-                                <MenuItem value={20}>20 Years</MenuItem>
-                                <MenuItem value={25}>25 Years</MenuItem>
-                                <MenuItem value={30}>30 Years</MenuItem>
-                            </Select>
-                        </Box>
-                    </Grid>
+                <Grid item xs={6}>
+                    <CustomNumberInputField label="Mortgage Fees" icon="$" placeholder="5,000" />
                 </Grid>
-                <Grid container item xs={12} spacing={3}>
-                    <Grid item xs={2}>
-                        <Typography>Mortgage Rate</Typography>
-                    </Grid>
-                    <Grid item xs={10}>
-                        <Box display="flex" flexDirection="column" maxWidth={100}>
-                            <TextField value="3.00%"></TextField>
-                        </Box>
-                    </Grid>
+
+                <Grid item xs={6}>
+                    <CustomNumberInputField label="Motgage Rate" icon="%" placeholder="2.5" />
                 </Grid>
-                <Grid container item xs={12} spacing={3}>
-                    <Grid item xs={2}>
-                        <Typography>Total mortgage payments (Monthly)</Typography>
-                    </Grid>
-                    <Grid item xs={10}>
-                        <Box display="flex" flexDirection="column" maxWidth={100}>
-                            <TextField value="$1,200"></TextField>
-                        </Box>
-                    </Grid>
+                <Grid item xs={6}>
+                    <CustomNumberInputField label="Add fees to mortgage" icon="$" placeholder="5,000" />
+                </Grid>
+                <Grid item xs={12}>
+                    <Typography>
+                        Borrowing $12,500 and replaying over 25 years
+                     </Typography>
+                </Grid>
+                <Grid item xs={12}>
+                    <Box display="flex" flexDirection="column" className={classes.finalPayment}>
+                        <Typography>
+                            Monthly payments of
+                        </Typography>
+                        <Typography variant = "h4">
+                            $500
+                        </Typography> 
+                    </Box>
                 </Grid>
             </Grid>
+
 
         </Box>
 

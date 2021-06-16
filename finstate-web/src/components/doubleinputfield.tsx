@@ -4,8 +4,12 @@ import SearchIcon from '@material-ui/icons/Search';
 import React from 'react'
 
 interface DoubleInputFieldProps {
-    name: string | undefined,
-    amount: number | undefined,
+    name: string,
+    amount: number,
+    index: number
+    removeItem: (index: number) => void
+    setAmount: (index: number, amount: number) => void
+    setType: (index: number, type: string) => void
 }
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -23,7 +27,8 @@ const useStyles = makeStyles((theme: Theme) =>
             padding: '2px 4px',
             display: 'flex',
             alignItems: 'center',
-            margin: 8,
+            marginTop: 8,
+            marginBottom: 8,
             "&:hover, &:focus": {
                 borderColor: "#000"
             },
@@ -48,12 +53,13 @@ const useStyles = makeStyles((theme: Theme) =>
             color: "#FFF",
             width: 30,
             height: 30,
+            margin: 8,
             display: "none"
         }
     }),
 );
 
-export const DoubleInputField: React.FC<DoubleInputFieldProps> = ({ name, amount }) => {
+export const DoubleInputField: React.FC<DoubleInputFieldProps> = ({ index, name, amount, removeItem, setType, setAmount }: DoubleInputFieldProps) => {
     const classes = useStyles();
 
     const handleSubmit = (evt: { preventDefault: () => void; }) => {
@@ -66,9 +72,8 @@ export const DoubleInputField: React.FC<DoubleInputFieldProps> = ({ name, amount
             <Paper component="form" variant="outlined" onSubmit={handleSubmit} className={classes.input}>
                 <InputBase
                     onChange={(e) => {
-
-                    }
-                    }
+                        setType(index, e.target.value)
+                    }}
                     value={name}
                     className={classes.typeInput}
                     placeholder="Income Type"
@@ -76,16 +81,18 @@ export const DoubleInputField: React.FC<DoubleInputFieldProps> = ({ name, amount
                 <Divider className={classes.divider} orientation="vertical" />
                 <InputBase
                     onChange={(e) => {
-
+                        setAmount(index, +e.target.value)
                     }
                     }
+                    onKeyDown={(evt) => ["e", "E", "+", "-"].includes(evt.key) && evt.preventDefault()}
+                    type="number"
                     value={amount}
                     className={classes.amountInput}
                     placeholder="Amount"
                     startAdornment={<InputAdornment position="start">$</InputAdornment>}
                 />
             </Paper>
-            < IconButton className={classes.removeButton} >
+            < IconButton className={classes.removeButton} onClick={() => removeItem(index)} >
                 <Remove />
             </IconButton >
         </Box>

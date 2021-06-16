@@ -39,10 +39,30 @@ const useStyles = makeStyles({
 
 export const ExpenseForm: React.FC<ExpenseFormProps> = ({ }) => {
     const classes = useStyles()
-    const [expenseTypes, setExpenseTypes] = useState<IncomeType[]>([])
+    const [expenseTypes, setExpenseTypes] = useState<IncomeType[]>([{ name: "", amount: 0 }, { name: "", amount: 0 }])
 
-    const addIncomeType = () => {
+    const addExpenseType = () => {
         setExpenseTypes(prevState => [EmptyIncomeType, ...prevState])
+    }
+
+    const setExpenseType = (index: number, type: string) => {
+        let itemToUpdate: IncomeType = expenseTypes[index]
+        itemToUpdate.name = type
+        expenseTypes[index] = itemToUpdate
+        setExpenseTypes([...expenseTypes]);
+    }
+
+    const setExpenseAmount = (index: number, amount: number) => {
+        let itemToUpdate: IncomeType = expenseTypes[index]
+        itemToUpdate.amount = amount
+        expenseTypes[index] = itemToUpdate
+        setExpenseTypes([...expenseTypes]);
+    }
+
+    const removeExpenseType = (index: number) => {
+        let items: IncomeType[] = expenseTypes;
+        items.splice(index, 1)
+        setExpenseTypes([...items]);
     }
 
     return (
@@ -53,13 +73,13 @@ export const ExpenseForm: React.FC<ExpenseFormProps> = ({ }) => {
             <Typography className={classes.subheading}>The following section will determine your estimated expenses! </Typography>
             <Divider orientation="horizontal" variant="fullWidth" className={classes.sectionDivider} />
 
-
             <Typography className={classes.prompt} gutterBottom>Add any types of expenses that may apply to you. Ex, property tax, property manager, lawn care, repairs, utlities etc.</Typography>
-            {expenseTypes.map((expenseType) => (
-                <DoubleInputField name={expenseType.name} amount={expenseType.amount} ></DoubleInputField>
+            {expenseTypes.map((expenseType, index) => (
+                <DoubleInputField setAmount={setExpenseAmount} setType={setExpenseType} removeItem={removeExpenseType} index={index} key={index} name={expenseType.name} amount={expenseType.amount} ></DoubleInputField>
             ))}
-            <Button className={classes.addButton} onClick={() => addIncomeType()}>Add</Button>
-            <Button className={classes.doneButton}>Done</Button>
+            <Button className={classes.addButton} onClick={() => addExpenseType()}>Add</Button>
+            <Button className={classes.addButton} onClick={() => removeExpenseType(1)}>Remove</Button>
+
         </Box>
     );
 }

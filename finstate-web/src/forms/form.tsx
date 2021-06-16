@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
-import { Accordion, AccordionSummary, Typography, AccordionDetails } from '@material-ui/core';
+import { Accordion, AccordionSummary, Typography, AccordionDetails, Button } from '@material-ui/core';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { MortgageForm } from './mortgageForm';
 import { FormHeader } from './FormHeader';
@@ -68,8 +68,8 @@ const useStyles = makeStyles((theme: Theme) =>
             paddingBottom: "15px",
             paddingRight: "32px",
             paddingLeft: "32px",
-            margin: 32,
-            alignSelf: "center"
+            marginTop: 64,
+            alignSelf: "flex-start"
         },
 
         formControl: {
@@ -86,6 +86,7 @@ export const Form: React.FC<FormProps> = ({ }) => {
             <IncomeForm />
             <ExpenseForm />
             <MortgageForm />
+            <Button className={classes.button}>Submit</Button>
         </div>
     );
 }

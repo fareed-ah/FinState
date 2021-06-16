@@ -2,7 +2,7 @@ import { Container, Typography, Box, Button } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles';
 import { useRouter } from 'next/dist/client/router';
 import React from 'react';
-import { Form } from '../src/forms/form';
+import { Form } from '../src/forms/Form';
 
 const useStyles = makeStyles({
   root: {
@@ -43,7 +43,7 @@ const useStyles = makeStyles({
     minHeight: "500px",
     padding: "50px",
     paddingTop: "70px",
-    paddingBottom: "200px",
+    paddingBottom: "20px",
   },
 
   heading2: {
